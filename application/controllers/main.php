@@ -5,7 +5,8 @@ class Main extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('main');
+	$data['main_content'] = "main";
+	$this->load->view('templates/main_temp',$data);
 	}
 }
 
