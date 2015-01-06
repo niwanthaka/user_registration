@@ -38,4 +38,16 @@ class User extends CI_Controller {
         }
     }
 
+    public function logout(){
+        //Unset user data
+        $this->session->unset_userdata('logged_in');
+        $this->session->unset_userdata('user_id');
+        $this->session->unset_userdata('username');
+        $this->session->sess_destroy();
+        
+         //Set message
+        $this->session->set_flashdata('logged_out', 'You have been logged out');
+        redirect('main/index');
+    }
+
 }
