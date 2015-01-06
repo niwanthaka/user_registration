@@ -8,6 +8,15 @@
  <?php echo form_open('user/register'); ?>
  
  <?php 
+
+ $contactname 		= @$user->contact_name;
+$contactphone 		= @$user->contact_phone;
+$address 			= @$user->address;
+$email 				= @$user->email;
+$dob 				= @$user->date_of_birth;
+$username 			= @$user->username;
+$password 			= @$user->password;
+$password2 			= @$user->password2;
  
 
 if( $_POST )
