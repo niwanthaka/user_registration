@@ -4,7 +4,17 @@
 <title>User Registration Using CI</title>
 </head>
 <body>
+    <div align="center">
+            <!--Header Starts-->
+            <p>
  
+                <a href="<?php echo base_url(); ?>user/register">Register</a>
+                     
+               <a href="<?php echo base_url(); ?>">Home</a> 
+             </p>
+         
+           <!--Header Ends-->
+    </div>
 
     <div align="center">
        <!--Content Starts-->

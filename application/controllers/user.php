@@ -50,4 +50,31 @@ class User extends CI_Controller {
         redirect('main/index');
     }
 
+          public function register(){
+     
+        $this->form_validation->set_rules('contactname','Contact Name','trim|required|xss_clean|callback_valid_name');
+        $this->form_validation->set_rules('contactphone','Contact Number','trim|required|xss_clean|callback_valid_phone_number_or_empty');
+        $this->form_validation->set_rules('address','Address','trim|required|xss_clean');
+        $this->form_validation->set_rules('email','Email','trim|required|valid_email|xss_clean');
+        $this->form_validation->set_rules('dob','Date of Birth','trim|required|xss_clean');
+        $this->form_validation->set_rules('username','Username','trim|required|min_length[4]|xss_clean|callback_un_exists');      
+        $this->form_validation->set_rules('password','Password','trim|required|min_length[4]|max_length[50]|xss_clean');
+        $this->form_validation->set_rules('password2','Confirm Password','trim|required|matches[password]|xss_clean');
+
+
+        if($this->form_validation->run() == FALSE){
+            //Load view and template
+            $data['main_content'] = 'register';
+            $this->load->view('templates/main_temp',$data);
+           //Validation ran and passed    
+        } else {
+           if($this->User_model->create_user()){
+                $this->session->set_flashdata('registered', 'You are now registered, please log in');
+                //Redirect to index page with above error
+                redirect('main/index');
+           }
+        }
+       
+    }
+
 }
