@@ -50,7 +50,7 @@ class User extends CI_Controller {
         redirect('main/index');
     }
 
-          public function register(){
+    public function register(){
      
         $this->form_validation->set_rules('contactname','Contact Name','trim|required|xss_clean|callback_valid_name');
         $this->form_validation->set_rules('contactphone','Contact Number','trim|required|xss_clean|callback_valid_phone_number_or_empty');
@@ -76,5 +76,42 @@ class User extends CI_Controller {
         }
        
     }
+
+        public function valid_phone_number_or_empty($value)
+    {
+    
+        if (preg_match('/^\(?[0-9]{3}\)?[-. ]?[0-9]{3}[-. ]?[0-9]{4}$/', $value))
+        {
+          return preg_replace('/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/', '($1) $2-$3', $value);
+        }
+        else
+        {
+          $this->form_validation->set_message('valid_phone_number_or_empty', 'Please enter a correct phone number');
+          return FALSE;
+        }
+   
+    }
+    public function valid_name($value)
+    {
+    
+        if (preg_match('/[^a-z\s.]/i', $value))
+        {
+
+          $this->form_validation->set_message('valid_name', 'Please enter a correct name');
+          return FALSE;
+        }
+        else
+        {
+          return TRUE;
+        }
+   
+    }
+
+    function un_exists($key)
+    {
+        $this->form_validation->set_message('un_exists', 'Username Already exists');
+        return $this->User_model->un_exists($key);
+    }
+      
 
 }
