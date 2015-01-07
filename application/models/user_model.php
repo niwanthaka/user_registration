@@ -56,4 +56,15 @@ class User_model extends CI_Model{
                 return $query->row();
         endif;    
     }
+
+        public function update_user($data){
+
+        if($this->session->userdata('logged_in')) : 
+        $this->db->where('id', $this->session->userdata('user_id'));
+        $update = $this->db->update('users', $data); 
+
+        return $update;
+
+        endif;    
+    }
 }
