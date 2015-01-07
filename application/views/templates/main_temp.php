@@ -2,6 +2,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>User Registration Using CI</title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    
+    <!-- Load jQuery JS -->
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <!-- Load jQuery UI Main JS  -->
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="../assets/js/script.js"></script>
+    <style type="text/css">
+    .error{
+    color: red;
+    }
+    .text-success{
+    color: green;
+    }
+    </style>
 </head>
 <body>
     <div align="center">
