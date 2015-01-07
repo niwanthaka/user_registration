@@ -1,3 +1,6 @@
+<?php if($this->session->flashdata('updated')) : ?>
+    <?php echo '<p class="text-success">' .$this->session->flashdata('updated') . '</p>'; ?>
+<?php endif; ?>
 <?php if($this->session->flashdata('registered')) : ?>
     <?php echo '<p class="text-success">' .$this->session->flashdata('registered') . '</p>'; ?>
 <?php endif; ?>
