@@ -112,6 +112,19 @@ class User extends CI_Controller {
         $this->form_validation->set_message('un_exists', 'Username Already exists');
         return $this->User_model->un_exists($key);
     }
+
+     public function update(){
+
+   if(!$this->session->userdata('logged_in')){
+       redirect('main/index');     
+   }else{ 
+       if($this->User_model->load_user()){
+            $data['user'] = $this->User_model->load_user();
+            $data['main_content'] = 'register';
+            $this->load->view('templates/main_temp',$data);
+          }
+    } 
+  }
       
 
 }
