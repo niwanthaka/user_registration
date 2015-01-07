@@ -51,6 +51,45 @@ class User extends CI_Controller {
     }
 
     public function register(){
+
+    	 if($this->session->userdata('logged_in')){
+            //redirect('home/index');
+          $this->form_validation->set_rules('contactname','Contact Name','trim|required|xss_clean|callback_valid_name');
+          $this->form_validation->set_rules('contactphone','Contact Number','trim|required|xss_clean|callback_valid_phone_number_or_empty');
+          $this->form_validation->set_rules('address','Address','trim|required|xss_clean');
+          $this->form_validation->set_rules('email','Email','trim|required|valid_email|xss_clean');
+          $this->form_validation->set_rules('dob','Date of Birth','trim|required|xss_clean');
+          if(!empty($_POST['password']) && !empty($_POST['password2'])) :
+          $this->form_validation->set_rules('password','Password','trim|required|min_length[4]|max_length[50]|xss_clean');
+          $this->form_validation->set_rules('password2','Confirm Password','trim|required|matches[password]|xss_clean');
+          endif;
+
+            if($this->form_validation->run() == FALSE){
+            //Load view and template
+            $data['main_content'] = 'register';
+            $this->load->view('templates/main_temp',$data);
+           //Validation ran and passed    
+            } else {
+               $data = array(
+                  'contact_name'         => $this->input->post('contactname'),
+                  'contact_phone'        => $this->input->post('contactphone'),
+                  'address'                  => $this->input->post('address'),
+                  'email'                    => $this->input->post('email'),
+                  'date_of_birth'            => $this->input->post('dob')
+              );
+               if(!empty($_POST['password']) && !empty($_POST['password2'])) :
+                $data['password'] = md5($this->input->post('password'));
+                endif;
+
+
+               if($this->User_model->update_user($data)){
+                    $this->session->set_flashdata('updated', 'Successfully updated');
+                    //Redirect to index page with above error
+                    redirect('main/index');
+               }
+            }
+
+        }else{ 
      
         $this->form_validation->set_rules('contactname','Contact Name','trim|required|xss_clean|callback_valid_name');
         $this->form_validation->set_rules('contactphone','Contact Number','trim|required|xss_clean|callback_valid_phone_number_or_empty');
@@ -74,6 +113,7 @@ class User extends CI_Controller {
                 redirect('main/index');
            }
         }
+      }
        
     }
 
