@@ -7,9 +7,12 @@
     <div align="center">
             <!--Header Starts-->
             <p>
- 
+               <?php if($this->session->userdata('logged_in')) : ?>
+               <p>Welcome,  <?php echo $this->session->userdata('username'); ?></p>
+               <a href="<?php echo base_url(); ?>user/update">Edit your profile</a>
+             <?php else : ?>
                 <a href="<?php echo base_url(); ?>user/register">Register</a>
-                     
+               <?php endif; ?>            
                <a href="<?php echo base_url(); ?>">Home</a> 
              </p>
          
