@@ -126,7 +126,7 @@ class User extends CI_Controller {
         }
         else
         {
-          $this->form_validation->set_message('valid_phone_number_or_empty', 'Please enter a correct phone number');
+          $this->form_validation->set_message('valid_phone_number_or_empty', 'Please enter a correct phone number(min 10 numbers)');
           return FALSE;
         }
    
